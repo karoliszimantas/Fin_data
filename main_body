@@ -4,10 +4,12 @@ import matplotlib.gridspec as gridspec
 
 while True:
     end = ""
-    print("Welcome to financial analysis. This project will help you to visualise financial data. You can chose to compare historical data over a number of accounting periods (horizontal analysis) or analyse single reporting period (vertical analysis)")
+    print("Welcome to financial analysis. This project will help you to visualise financial data. You can choose to compare historical data over a number of accounting periods (horizontal analysis) or analyse single reporting period (vertical analysis)")
     select_menu = int(input("Please enter 1 (vertical)\'or \'2 (horizontal)"))
     if select_menu in [1, 2]:
         if select_menu == 1:
+        
+        #OOD
             class Year1:
                 def __init__(self, rev, cogs, assets, liab, equity, net):
                     self.rev = input("Revenues")
@@ -47,8 +49,8 @@ while True:
                 def text():
                     print('Enter 4th period data')
 
-
-            class Features:
+#under development. Target: to identify delta between values and diferiancate color of text according to result
+'''            class Features:
                 def Delta_1_year(self, delta):
                     self.delta = (int(year2.rev) - int(year1.rev)) / int(year1.rev) * 100
                     return round(self.delta, 2)
@@ -57,7 +59,7 @@ while True:
                     if self.delta < 0:
                         Colo = 'r'
                     elif self.delta > 0:
-                        Colo = 'g'
+                        Colo = 'g' '''
 
 
             while end not in ("Q", "q"):
@@ -81,7 +83,8 @@ while True:
                             x_axis = np.arange(1, 3)
                             labels = [int(year1.rev), int(year2.rev)]
                             plt.bar(x_axis, [int(x) for x in labels])
-                            # plt.text(2, int(year2.rev) + .25, str(Delta_1_year()) + '%', color=Colo)
+                            # plt.text(2, int(year2.rev) + .25, str(Delta_1_year()) + '%', color=Colo) 
+                            #Under development. Associated with Delta and Color_change f-tions.
                             plt.xlabel('Periods')
                             plt.ylabel('Revenue')
                             plt.xticks(x_axis, x_axis)
@@ -93,6 +96,7 @@ while True:
                             labels = [int(year1.cogs), int(year2.cogs)]
                             plt.bar(x_axis, [int(x) for x in labels])
                             # plt.text(2, int(year2.cogs) + .25, str(Delta_1_year()) + '%', color=Colo)
+                             #Under development. Associated with Delta and Color_change f-tions.
                             plt.xlabel('Periods')
                             plt.ylabel('Costs of goods')
                             plt.xticks(x_axis, x_axis)
@@ -104,6 +108,7 @@ while True:
                             labels = [int(year1.assets), int(year2.assets)]
                             plt.bar(x_axis, [int(x) for x in labels])
                             # plt.text(2, int(year2.assets) + .25, str(Delta_1_year()) + '%', color=Colo)
+                            #Under development. Associated with Delta and Color_change f-tions.
                             plt.xlabel('Periods')
                             plt.ylabel('Assets')
                             plt.xticks(x_axis, x_axis)
@@ -115,6 +120,7 @@ while True:
                             labels = [int(year1.liab), int(year2.liab)]
                             plt.bar(x_axis, [int(x) for x in labels])
                             #plt.text(2, int(year2.liab) + .25, str(Delta_1_year()) + '%', color=Colo)
+                            #Under development. Associated with Delta and Color_change f-tions.
                             plt.xlabel('Periods')
                             plt.ylabel('Liabilities')
                             plt.xticks(x_axis, x_axis)
@@ -126,6 +132,7 @@ while True:
                             labels = [int(year1.equity), int(year2.equity)]
                             plt.bar(x_axis, [int(x) for x in labels])
                             # plt.text(2, int(year2.equity) + .25, str(Delta_1_year()) + '%', color=Colo)
+                             #Under development. Associated with Delta and Color_change f-tions.
                             plt.xlabel('Periods')
                             plt.ylabel('Equity')
                             plt.xticks(x_axis, x_axis)
@@ -137,6 +144,7 @@ while True:
                             labels = [int(year1.net), int(year2.net)]
                             plt.bar(x_axis, [int(x) for x in labels])
                             # plt.text(2, int(year2.net) + .25, str(Delta_1_year()) + '%', color=Colo)
+                             #Under development. Associated with Delta and Color_change f-tions.
                             plt.xlabel('Periods')
                             plt.ylabel('Net income')
                             plt.xticks(x_axis, x_axis)
@@ -328,6 +336,8 @@ while True:
             else:
                 break
         elif select_menu == 2:
+        
+        #Functional
             print('Enter income statement information')
             rev = float(input("Enter revenues"))
             cogs = float(input("Enter costs of goods"))
@@ -349,65 +359,32 @@ while True:
             def days_sales_outstanding():
                 return int(t_receivables / rev * 365)
 
-
-            # days_sales_outstanding = t_receivables / rev * 365
-
             def days_payable_outstanding():
                 return int(t_payables / cogs * 365)
-
-
-            # days_payable_outstanding = t_payables / cogs * 365
 
             def days_inventory_outstanding():
                 return int(inventory / cogs * 365)
 
-
-            # days_inventory_outstanding = inventory / cogs * 365
-
             def roa_percentage():
                 return int(100 * (tot_assets / net_income))
-
-
-            # roa_percentage = 100 * (tot_assets / net_income)
 
             def roa():
                 return int(100 - roa_percentage())
 
-
-            # roa = 100 - roa_percentage
-
             def operating_profit_percetenge():
                 return int(100 * (ebit / rev))
-
-
-            # operating_profit_percetenge = 100 * (ebit / rev)
 
             def operating_profit():
                 return int(100 - operating_profit_percetenge())
 
-
-            # operating_profit = 100 - operating_profit_percetenge
-
             def roe_percetange():
                 return int(100 * (tot_equity / net_income))
-
 
             def roe():
                 return int(100 - roe_percetange())
 
-
-            # roe_percetange = 100 * (tot_equity / net_income)
-
-            # roe = 100 - roe_percetange
-
-            # liquidity
             def current_ratio():
                 return int(short_assets / short_liabl)
-
-
-            # net_trade_cycle = days_sales_outstanding + days_inventory_outstanding - days_payable_outstanding
-
-            # profitability
 
             # graphics
 
@@ -483,20 +460,18 @@ while True:
                 circle = plt.Circle((0, 0), 0.8, fc="white")
                 fig = plt.gcf()
                 fig.gca().add_artist(circle)
-
                 plt.show()
 
 
-            def Second_color():
-                if roe_percetange or operating_profit_percetenge or roa_percentage < 5:
+            #Under development. Target: differentiate colors regarding the value 
+            '''def Second_color():
+                if roe_percetange() or operating_profit_percetenge() or roa_percentage() < 5:
                     return "red"
-                elif roe_percetange or operating_profit_percetenge or roa_percentage > 5 and roe_percetange or operating_profit_percetenge or roa_percentage < 10:
+                elif roe_percetange or operating_profit_percetenge() or roa_percentage() > 5 and roe_percetange or operating_profit_percetenge() or roa_percentage() < 10:
                     return "yellow"
                 else:
                     return "green"
-
-
-            pie_chart_colors = ['white', Second_color()]
+            pie_chart_colors = ['white', Second_color()]'''
 
             while end not in ("Q", "q"):
                 print(
