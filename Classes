@@ -1,1 +1,29 @@
+class Year1:
+                def __init__(self, rev, cogs, assets, liab, equity, net):
+                    self.rev = input("Revenues")
+                    self.cogs = input("Costs of goods")
+                    self.assets = input("Total assets")
+                    self.liab = input("Total liabilities")
+                    self.equity = input("Equity")
+                    self.net = input("Net income")
+
+                def text():
+                    print('Enter first period data')
+
+class Year2(Year1):
+
+                def __init__(self, rev, cogs, asetss, liab, equity, net):
+                    super().__init__(rev, cogs, asetss, liab, equity, net)
+
+                def text():
+                    print('Enter second period data')
+
+class Year3(Year1):
+
+                def __init__(self, rev, cogs, assets, liab, equity, net):
+                    super().__init__(rev, cogs, assets, liab, equity, net)
+
+                def text():
+                    print('Enter third period data')
+
 
