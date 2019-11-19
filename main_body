@@ -9,7 +9,7 @@ while True:
     if select_menu in [1, 2]:
         if select_menu == 1:
         
-        #OOD
+        #Objective-oriented programming
             class Year1:
                 def __init__(self, rev, cogs, assets, liab, equity, net):
                     self.rev = input("Revenues")
@@ -337,7 +337,7 @@ while True:
                 break
         elif select_menu == 2:
         
-        #Functional
+        #Functional programing
             print('Enter income statement information')
             rev = float(input("Enter revenues"))
             cogs = float(input("Enter costs of goods"))
