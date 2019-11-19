@@ -49,7 +49,7 @@ while True:
                 def text():
                     print('Enter 4th period data')
 
-#under development. Target: to identify delta between values and diferiancate color of text according to result
+#under development. Target: to identify delta between values and diferiancate color of text according to output
 ```       
             class Features:
                 def Delta_1_year(self, delta):
