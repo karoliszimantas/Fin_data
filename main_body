@@ -5,7 +5,7 @@ import matplotlib.gridspec as gridspec
 while True:
     end = ""
     print("Welcome to financial analysis. This project will help you to visualise financial data. You can choose to compare historical data over a number of accounting periods (horizontal analysis) or analyse single reporting period (vertical analysis)")
-    select_menu = int(input("Please enter 1 (vertical)\'or \'2 (horizontal)"))
+    select_menu = int(input("Please enter "1" (vertical analysis) or 2 (horizontal analysis)"))
     if select_menu in [1, 2]:
         if select_menu == 1:
         
@@ -50,7 +50,8 @@ while True:
                     print('Enter 4th period data')
 
 #under development. Target: to identify delta between values and diferiancate color of text according to result
-'''            class Features:
+'''            
+            class Features:
                 def Delta_1_year(self, delta):
                     self.delta = (int(year2.rev) - int(year1.rev)) / int(year1.rev) * 100
                     return round(self.delta, 2)
@@ -59,7 +60,8 @@ while True:
                     if self.delta < 0:
                         Colo = 'r'
                     elif self.delta > 0:
-                        Colo = 'g' '''
+                        Colo = 'g' 
+'''
 
 
             while end not in ("Q", "q"):
