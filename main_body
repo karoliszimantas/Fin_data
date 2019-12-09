@@ -5,7 +5,7 @@ import matplotlib.gridspec as gridspec
 while True:
     end = ""
     print("Welcome to financial analysis. This project will help you to visualise financial data. You can choose to compare historical data over a number of accounting periods (horizontal analysis) or analyse single reporting period (vertical analysis)")
-    select_menu = int(input("Please enter "1" (vertical analysis) or 2 (horizontal analysis)"))
+    select_menu = int(input("Please enter 1 (vertical analysis) or 2 (horizontal analysis)"))
     if select_menu in [1, 2]:
         if select_menu == 1:
         
