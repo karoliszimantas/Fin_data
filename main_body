@@ -50,8 +50,7 @@ while True:
                     print('Enter 4th period data')
 
 #under development. Target: to identify delta between values and diferiancate color of text according to output
-```       
-            class Features:
+```class Features:
                 def Delta_1_year(self, delta):
                     self.delta = (int(year2.rev) - int(year1.rev)) / int(year1.rev) * 100
                     return round(self.delta, 2)
@@ -60,8 +59,7 @@ while True:
                     if self.delta < 0:
                         Colo = 'r'
                     elif self.delta > 0:
-                        Colo = 'g' 
-```
+                        Colo = 'g'```
 
 
             while end not in ("Q", "q"):
