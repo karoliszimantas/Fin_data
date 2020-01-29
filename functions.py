@@ -20,7 +20,6 @@ tot_liabl = float(input("Enter total liabilities"))
 tot_equity = float(input("Enter total equity"))
 
 # ratios
-
 def days_sales_outstanding():
     return int(t_receivables / rev * 365)
 
