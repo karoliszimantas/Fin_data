@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+import sys
 
 # Objective-oriented programming
 class Year:
@@ -74,7 +74,7 @@ def vertical_analysis():
             end = input('Press any key to go back. If you want to quit, please enter "Q"')
 
             if end in ['q', 'Q']:
-                return
+                sys.exit()
 
 
 def horizontal_analysis():
@@ -104,7 +104,7 @@ def horizontal_analysis():
             functions.profitability()
         end = input('Enter "Q" if you wat to go back.\n Enter any key to select other option')
         if end in ('Q', 'q'):
-            return
+            sys.exit()
 
 
 def main_loop():
