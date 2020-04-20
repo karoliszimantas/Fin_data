@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sys
 
-# Objective-oriented programming
+
 class Year:
     def __init__(self, rev, cogs, assets, liab, equity, net):
         self.rev = rev
@@ -23,26 +23,56 @@ def input_attrs(initial_string):
     net = input("Net income")
     return rev, cogs, assets, liab, equity, net
 
-
-def delta_1_year(year_1, year_2):
-    delta = (int(year_2.rev) - int(year_1.rev)) / int(year_1.rev) * 100
-    return round(delta, 2)
-
-
 def plot_plots(years, ylabel, attribute):
-    plt.style.use("bmh")  # revenue
+    plt.tight_layout()
+    plt.style.use("bmh")
     x_axis = np.arange(1, len(years) + 1)
     labels = [int(getattr(year, attribute)) for year in years]
-    plt.bar(x_axis, labels)
-    # plt.text(2, int(year2.rev) + .25, str(Delta_1_year()) + '%', color=Colo)
-    # Under development. Associated with Delta and Color_change f-tions.
+    plt.plot(x_axis, labels)
     plt.xlabel('Periods')
     plt.ylabel(ylabel)
     plt.xticks(x_axis, x_axis)
     plt.show()
 
+def plot_income(years):
+    fig, ax1 = plt.subplots()
+    width = 0.22
+    x_axis = np.arange(1, len(years) + 1)
+    rev_labels = [int(getattr(year, 'rev',)) for year in years]
+    net_labels = [int(getattr(year, 'net',)) for year in years]
+    ax1.bar(x_axis - width/2 ,rev_labels, width, label='Revenue')
+    ax1.bar(x_axis + width/2, net_labels, width, label='Net income')
+    ax1.set_xlabel('Periods')
+    ax1.legend()
 
-def vertical_analysis():
+    ax2 = ax1.twinx()
+
+    profit_margin = [a / b * 100 for a, b in zip(net_labels, rev_labels)]
+    ax2.plot(x_axis,profit_margin, color='red', label='Profit margin', lw=3)
+    ax2.set_ylabel('%')
+    ax2.legend(loc=2)
+
+    plt.xticks(x_axis, x_axis)
+    fig.tight_layout()
+    plt.show()
+
+
+    '''for indexes,heights in enumerate(labels[1:],1):
+        gud_index = str(indexes)
+        x_position = x_axis[indexes[1:]]
+        y_position = heights + 0.5
+        plt.text(x_position,y_position, 'jog')'''
+
+
+'''def delta_text(plot):
+    for rect in plot:
+        y_position = rect.get_height() + 0.5
+        x_position = rect.get_x() + x_centre
+        x_centre = rect.get_width() / 3.5
+        plt.text(x_position + x_centre, y_position, x_position)'''
+
+
+def horizontal_analysis():
     while True:
         select_h_main = int(input("Enter the number of comparative periods\n 2 year\n 3 year\n 4 year: "))
         years = []
@@ -77,7 +107,7 @@ def vertical_analysis():
                 sys.exit()
 
 
-def horizontal_analysis():
+def vertical_analysis():
     import functions
     # Under development. Target: differentiate colors regarding the value
     # def Second_color():
@@ -112,8 +142,8 @@ def main_loop():
         print("Welcome to financial analysis. This project will help you to visualise financial data. "
               "You can choose to compare historical data over a number of accounting periods (horizontal analysis) "
               "or analyse single reporting period (vertical analysis)")
-        select_menu = int(input("Please enter 1 (vertical analysis) or 2 (horizontal analysis): "))
-        if select_menu in [1, 2]:
+        select_menu = int(input("Please enter 1 (vertical analysis) or 2 (horizontal analysis) or income 3 : "))
+        if select_menu in [1, 2, 3 ]:
             if select_menu == 1:
                 # under development. Target: to identify delta between values and diferiancate color of text according to output
                 # class Features:
@@ -131,6 +161,15 @@ def main_loop():
             elif select_menu == 2:
                 # Functional programing
                 horizontal_analysis()
+            elif select_menu == 3:
+                while True:
+                    select_h_main = int(input("Enter the number of comparative periods\n 2 year\n 3 year\n 4 year: "))
+                    years = []
+                    for year_id in range(select_h_main):
+                        attrs = input_attrs('Enter ' + str(year_id + 1) + ' period data: ')
+                        year = Year(*attrs)
+                        years.append(year)
+                    plot_income(years)
             else:
                 print("Wrong choice")
         end = input('Enter "Q" if you want to exit.\n Enter any key to select other option: ')
