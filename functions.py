@@ -64,14 +64,14 @@ def current_ratio():
 
 def current_ratio_pic():
     plt.xkcd()
-    plt.axhline(1, color='r', linestyle='-')
-    plt.axhline(3, color="r", linestyle='-')
     plt.text(0.8, 3.1, "Underperformance", fontsize=20)
-    plt.text(1, 0.9, "Risk", fontsize=20)
+    plt.text(1, 0.5, "Risk", fontsize=20)
     plt.ylabel("Current ratio")
     plt.xticks([])
     plt.bar(1, current_ratio(), label="Current ratio is {}".format(current_ratio()))
     plt.legend(loc=8)
+    plt.axhspan(0, 1, facecolor='red', alpha=0.5)
+    plt.axhspan(3,5, facecolor='yellowgreen', alpha=0.5)
     plt.show()
 
 
