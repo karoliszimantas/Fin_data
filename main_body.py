@@ -78,20 +78,6 @@ def plot_income(years):
     fig.tight_layout()
     plt.show()
 
-    '''for indexes,heights in enumerate(labels[1:],1):
-        gud_index = str(indexes)
-        x_position = x_axis[indexes[1:]]
-        y_position = heights + 0.5
-        plt.text(x_position,y_position, 'jog')'''
-
-
-'''def delta_text(plot):
-    for rect in plot:
-        y_position = rect.get_height() + 0.5
-        x_position = rect.get_x() + x_centre
-        x_centre = rect.get_width() / 3.5
-        plt.text(x_position + x_centre, y_position, x_position)'''
-
 
 def horizontal_analysis():
     while True:
@@ -128,31 +114,26 @@ def horizontal_analysis():
                 sys.exit()
 
 
-def vertical_analysis():
-    import functions
-    # Under development. Target: differentiate colors regarding the value
-    # def Second_color():
-    #     if roe_percetange() or operating_profit_percetenge() or roa_percentage() < 5:
-    #         return "red"
-    #     elif roe_percetange or operating_profit_percetenge() or roa_percentage() > 5 and
-    #     roe_percetange or operating_profit_percetenge() or roa_percentage() < 10:
-    #         return "yellow"
-    #     else:
-    #         return "green"
-    # pie_chart_colors = ['white', Second_color()]
+def vertical_analysis(manual_data_input):
     while True:
+        if manual_data_input is True:
+            import manual_input
+            import functions_ratios
+        else:
+            import yahoo_finance
+            import functions_ratios
         print(
             "please select pics\n 1 - current ratio analysis\n 2 - capital structure\n "
             "3 - cash conversion\n 4 - profitability")
         select_h_main = int(input("Please enter selection"))
         if select_h_main == 1:
-            functions.current_ratio_pic()
+            functions_ratios.current_ratio_pic()
         if select_h_main == 2:
-            functions.capital_structure()
+            functions_ratios.capital_structure()
         if select_h_main == 3:
-            functions.cash_conversion_cycle()
+            functions_ratios.cash_conversion_cycle()
         if select_h_main == 4:
-            functions.profitability()
+            functions_ratios.profitability()
         end = input('Enter "Q" if you wat to go back.\n Enter any key to select other option')
         if end in ('Q', 'q'):
             sys.exit()
@@ -163,24 +144,11 @@ def main_loop():
         print("Welcome to financial analysis. This project will help you to visualise financial data. "
               "You can choose to compare historical data over a number of accounting periods (horizontal analysis) "
               "or analyse single reporting period (vertical analysis)")
-        select_menu = int(input("Please enter 1 (vertical analysis) \n2 (horizontal analysis) \n3 income statement\n4 balance sheet "))
-        if select_menu in [1, 2, 3, 4]:
+        select_menu = int(input("Please enter\n1 (vertical analysis) \n2 (horizontal analysis) \n3 income statement\n4 balance sheet\n5 extract data from yahoo finance webpage"))
+        if select_menu in [1, 2, 3, 4, 5]:
             if select_menu == 1:
-                # under development. Target: to identify delta between values and diferiancate color of text according to output
-                # class Features:
-                #      def Delta_1_year(self, delta):
-                #          self.delta = (int(year2.rev) - int(year1.rev)) / int(year1.rev) * 100
-                #          return round(self.delta, 2)
-                #
-                #      def Color_change(self):
-                #          if self.delta < 0:
-                #              Colo = 'r'
-                #          elif self.delta > 0:
-                #              Colo = 'g'
-                vertical_analysis()
-
+                vertical_analysis(manual_data_input = True)
             elif select_menu == 2:
-                # Functional programing
                 horizontal_analysis()
             elif select_menu == 3:
                 while True:
@@ -203,6 +171,9 @@ def main_loop():
                         year = Year(*attrs)
                         years.append(year)
                     plot_balance(years)
+            elif select_menu == 5:
+                vertical_analysis(manual_data_input = False)
+                import functions_ratios
             else:
                 print("Wrong choice")
         end = input('Enter "Q" if you want to exit.\n Enter any key to select other option: ')
