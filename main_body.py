@@ -118,6 +118,7 @@ def vertical_analysis(manual_data_input):
     while True:
         if manual_data_input is True:
             import manual_input
+            manual_input.read_information_input()
             import functions_ratios
         else:
             import yahoo_finance
@@ -127,13 +128,13 @@ def vertical_analysis(manual_data_input):
             "3 - cash conversion\n 4 - profitability")
         select_h_main = int(input("Please enter selection"))
         if select_h_main == 1:
-            functions_ratios.current_ratio_pic()
+            functions_ratios.current_ratio_pic(manual_input.financials)
         if select_h_main == 2:
-            functions_ratios.capital_structure()
+            functions_ratios.capital_structure(manual_input.financials)
         if select_h_main == 3:
-            functions_ratios.cash_conversion_cycle()
+            functions_ratios.cash_conversion_cycle(manual_input.financials)
         if select_h_main == 4:
-            functions_ratios.profitability()
+            functions_ratios.profitability(manual_input.financials)
         end = input('Enter "Q" if you wat to go back.\n Enter any key to select other option')
         if end in ('Q', 'q'):
             sys.exit()
