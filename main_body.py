@@ -126,26 +126,27 @@ def vertical_analysis(manual_data_input):
         print(
             "please select pics\n 1 - current ratio analysis\n 2 - capital structure\n "
             "3 - cash conversion\n 4 - profitability")
-        select_h_main = int(input("Please enter selection"))
-        if select_h_main == 1:
-            functions_ratios.current_ratio_pic(manual_input.financials)
-        if select_h_main == 2:
-            functions_ratios.capital_structure(manual_input.financials)
-        if select_h_main == 3:
-            functions_ratios.cash_conversion_cycle(manual_input.financials)
-        if select_h_main == 4:
-            functions_ratios.profitability(manual_input.financials)
-        end = input('Enter "Q" if you wat to go back.\n Enter any key to select other option')
-        if end in ('Q', 'q'):
-            sys.exit()
+        while True:
+            select_h_main = int(input("Please enter selection"))
+            if select_h_main == 1:
+                functions_ratios.current_ratio_pic(manual_input.financials)
+            if select_h_main == 2:
+                functions_ratios.capital_structure(manual_input.financials)
+            if select_h_main == 3:
+                functions_ratios.cash_conversion_cycle(manual_input.financials)
+            if select_h_main == 4:
+                functions_ratios.profitability(manual_input.financials)
+            end = input('Enter "Q" if you wat to go back.\n Enter any key to select other option')
+            if end in ('Q', 'q'):
+                sys.exit()
 
 
 def main_loop():
     while True:
         print("Welcome to financial analysis. This project will help you to visualise financial data. "
-              "You can choose to compare historical data over a number of accounting periods (horizontal analysis) "
-              "or analyse single reporting period (vertical analysis)")
-        select_menu = int(input("Please enter\n1 (vertical analysis) \n2 (horizontal analysis) \n3 income statement\n4 balance sheet\n5 extract data from yahoo finance webpage"))
+              "You can choose to compare historical data over a number of accounting periods (horizontal analysis), "
+              "analyse single reporting period (vertical analysis) or other options")
+        select_menu = int(input("Please enter\n1 Vertical analysis \n2 Horizontal analysis \n3 Income statement analysis\n4 Balance sheet analysis\n5 Extract data from yahoo finance webpage"))
         if select_menu in [1, 2, 3, 4, 5]:
             if select_menu == 1:
                 vertical_analysis(manual_data_input = True)

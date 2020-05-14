@@ -91,7 +91,7 @@ def profitability(financials):
 
     ax1 = plt.subplot(gs[0, 0])
     plt.pie([roa(financials), roa_percentage(financials)],
-            autopct='%1.1f%%',
+            labels=['',str(roa_percentage(financials))+'%'],
             startangle=90,
             colors=["white", "red"])
     plt.title("Return on assets")
@@ -101,7 +101,7 @@ def profitability(financials):
 
     ax2 = plt.subplot(gs[0, 1])
     plt.pie([operating_profit(financials), operating_profit_percetenge(financials)],
-            autopct='%1.1f%%',
+            labels=['',str(operating_profit_percetenge(financials))+'%'],
             startangle=90,
             colors=["white", "red"])
     plt.title("Operating profit margin")
@@ -111,7 +111,7 @@ def profitability(financials):
 
     ax3 = plt.subplot(gs[1, :])
     plt.pie([roe(financials), roe_percetange(financials)],
-            autopct='%1.1f%%',
+            labels=['',str(roe_percetange(financials))+'%'],
             startangle=90,
             colors=["white", "red"])
     plt.title("Return on equity")
