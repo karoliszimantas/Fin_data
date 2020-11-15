@@ -1,4 +1,3 @@
-import numpy as np
 import matplotlib.pyplot as plt
 import sys
 
@@ -26,7 +25,7 @@ def input_attrs(initial_string):
 def plot_plots(years, ylabel, attribute):
     plt.tight_layout()
     plt.style.use("bmh")
-    x_axis = np.arange(1, len(years) + 1)
+    x_axis = range(1, len(years) + 1)
     labels = [int(getattr(year, attribute)) for year in years]
     plt.plot(x_axis, labels)
     plt.xlabel('Periods')
@@ -37,7 +36,7 @@ def plot_plots(years, ylabel, attribute):
 def plot_balance(years):
     fig, ax1 = plt.subplots()
     width = 0.22
-    x_axis = np.arange(1, len(years) + 1)
+    x_axis = range(1, len(years) + 1)
     t_asset_labels = [int(getattr(year, 'assets')) for year in years]
     t_liabl_labels = [int(getattr(year, 'liab')) for year in years]
     ax1.bar(x_axis - width/2 ,t_asset_labels, width, label='Total assets')
@@ -59,7 +58,7 @@ def plot_balance(years):
 def plot_income(years):
     fig, ax1 = plt.subplots()
     width = 0.22
-    x_axis = np.arange(1, len(years) + 1)
+    x_axis = range(1, len(years) + 1)
     rev_labels = [int(getattr(year, 'rev', )) for year in years]
     net_labels = [int(getattr(year, 'net', )) for year in years]
     ax1.bar(x_axis - width / 2, rev_labels, width, label='Revenue')

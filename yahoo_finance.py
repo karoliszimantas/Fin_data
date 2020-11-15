@@ -1,14 +1,50 @@
-import urllib.request as url
+from selenium import webdriver
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import StaleElementReferenceException
 from bs4 import BeautifulSoup
 
 
 company = input('enter companies abbreviation')
 income_page = 'https://finance.yahoo.com/quote/' + company + '/financials/'
 balance_page = 'https://finance.yahoo.com/quote/' + company + '/balance-sheet/'
-set_income_page = url.urlopen(income_page).read()
-set_balance_page = url.urlopen(balance_page).read()
-soup_income = BeautifulSoup(set_income_page, 'html.parser')
-soup_balance = BeautifulSoup(set_balance_page, 'html.parser')
+
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--no-sandbox')
+wd = webdriver.Chrome('C:\Drivers\chromedriver_win32\chromedriver.exe', options=chrome_options)
+
+wd.get('https://finance.yahoo.com/quote/' + company + '/financials/')
+DELAY = 15
+
+wd.maximize_window()
+
+wd.get('https://finance.yahoo.com/quote/' + company + '/financials/')
+
+try:
+    btn = WebDriverWait(wd, DELAY).until(EC.presence_of_element_located((By.XPATH, '//*[@id="consent-page"]/div/div/div/div[2]/div[2]/form/button')))
+    wd.execute_script("arguments[0].scrollIntoView();", btn)
+    wd.execute_script("arguments[0].click();", btn)
+except:
+    pass
+
+ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
+
+results_income = WebDriverWait(wd, DELAY).until(EC.presence_of_element_located((By.ID, 'Col1-1-Financials-Proxy')))
+#soup_income = BeautifulSoup(results_income.get_attribute('innerHTML'), 'html.parser')
+
+results_balance = results_income.find_element(By.XPATH, '//*[@id="Col1-1-Financials-Proxy"]/section/div[1]/div[1]/div/a[1]/div/span').click()
+#soup_balance = BeautifulSoup(results_income.get_attribute('innerHTML'), 'html.parser')
+
+revenue_element = soup_income.find('span', string='Total Revenue').find_next('span').text
+cogs_element = soup_income.find('span', string='Cost of Revenue').find_next('span').text
+ebit_element = soup_income.find('span', string='Operating Income').find_next('span').text
+net_element = soup_income.find('span', string='Pretax Income').find_next('span').text
+short_assets_element = soup_balance.find('span', string='Current Assets').find_next('span').text
+inventory_element = soup_balance.find('span', string='Inventory').find_next('span').text
+
+wd.quit()
 
 revenue_element = soup_income.find('span', string='Total Revenue').find_next('span').text
 cogs_element = soup_income.find('span', string='Cost of Revenue').find_next('span').text
