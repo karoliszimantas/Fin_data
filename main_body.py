@@ -12,7 +12,8 @@ class Year:
         self.net = net
 
 
-def input_attrs(initial_string):
+def input_attrs(initial_string:'str') -> 'tuple':
+    """Generates multiple inputs for financial data"""
     print(initial_string)
     rev = input("Revenues")
     cogs = input("Costs of goods")
@@ -22,7 +23,9 @@ def input_attrs(initial_string):
     net = input("Net income")
     return rev, cogs, assets, liab, equity, net
 
-def plot_plots(years, ylabel, attribute):
+
+def plot_plots(years:'list', ylabel:'str', attribute:'str') -> 'image':
+    """creating visualizations for comparison of selected value over the periods"""
     plt.tight_layout()
     plt.style.use("bmh")
     x_axis = range(1, len(years) + 1)
@@ -33,13 +36,15 @@ def plot_plots(years, ylabel, attribute):
     plt.xticks(x_axis, x_axis)
     plt.show()
 
-def plot_balance(years):
+
+def plot_balance(years:'list') -> 'image':
+    """creating visualizations for comparison of assets and liabilities values over the periods"""
     fig, ax1 = plt.subplots()
     width = 0.22
     x_axis = range(1, len(years) + 1)
     t_asset_labels = [int(getattr(year, 'assets')) for year in years]
     t_liabl_labels = [int(getattr(year, 'liab')) for year in years]
-    ax1.bar(x_axis - width/2 ,t_asset_labels, width, label='Total assets')
+    ax1.bar(x_axis - width/2, t_asset_labels, width, label='Total assets')
     ax1.bar(x_axis + width/2, t_liabl_labels, width, label='Total liabilities')
     ax1.set_xlabel('Periods')
     ax1.legend()
@@ -47,7 +52,7 @@ def plot_balance(years):
     ax2 = ax1.twinx()
 
     debt_assets = [a / b * 100 for a, b in zip(t_liabl_labels, t_asset_labels)]
-    ax2.plot(x_axis,debt_assets, color='red', label='Debt to Assets', lw=3)
+    ax2.plot(x_axis, debt_assets, color='red', label='Debt to Assets', lw=3)
     ax2.set_ylabel('%')
     ax2.legend(loc=2)
 
@@ -55,7 +60,9 @@ def plot_balance(years):
     fig.tight_layout()
     plt.show()
 
-def plot_income(years):
+
+def plot_income(years:'list') -> 'image':
+    """creates visualization for profit, i.e. revenue, net income, profit margin"""
     fig, ax1 = plt.subplots()
     width = 0.22
     x_axis = range(1, len(years) + 1)
@@ -79,6 +86,7 @@ def plot_income(years):
 
 
 def horizontal_analysis():
+    """loop which generates input for comparative periods"""
     while True:
         select_h_main = int(input("Enter the number of comparative periods\n 2 year\n 3 year\n 4 year: "))
         years = []
@@ -113,7 +121,8 @@ def horizontal_analysis():
                 sys.exit()
 
 
-def vertical_analysis(manual_data_input):
+def vertical_analysis(manual_data_input:'bool'):
+    """loop which generates input for comparative periods"""
     while True:
         if manual_data_input is True:
             import manual_input
@@ -141,11 +150,13 @@ def vertical_analysis(manual_data_input):
 
 
 def main_loop():
+    """main loop of function"""
     while True:
         print("Welcome to financial analysis. This project will help you to visualise financial data. "
               "You can choose to compare historical data over a number of accounting periods (horizontal analysis), "
               "analyse single reporting period (vertical analysis) or other options")
-        select_menu = int(input("Please enter\n1 Vertical analysis \n2 Horizontal analysis \n3 Income statement analysis\n4 Balance sheet analysis\n5 Extract data from yahoo finance webpage"))
+        select_menu = int(input("Please enter\n1 Vertical analysis \n2 Horizontal analysis \n3 Income statement analysis\n"
+                                "4 Balance sheet analysis\n5 Extract data from yahoo finance webpage"))
         if select_menu in [1, 2, 3, 4, 5]:
             if select_menu == 1:
                 vertical_analysis(manual_data_input = True)

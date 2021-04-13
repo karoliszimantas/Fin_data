@@ -3,7 +3,7 @@ import matplotlib.gridspec as gridspec
 
 
 # ratios
-def days_sales_outstanding(financials):
+def days_sales_outstanding(financials:""):
     return int(financials['t_receivables'] / financials['rev'] * 365)
 
 
