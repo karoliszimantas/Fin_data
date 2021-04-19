@@ -16,7 +16,7 @@ def days_inventory_outstanding(financials):
 
 
 def roa_percentage(financials):
-    return int(100 * (financials['tot_assets'] / financials['net_income']))
+    return int(100 * (financials['net_income'] / financials['tot_assets'] ))
 
 
 def roa(financials):
@@ -24,7 +24,7 @@ def roa(financials):
 
 
 def operating_profit_percetenge(financials):
-    return int(100 * (financials['ebit'] / financials['rev']))
+    return int(100 * (financials['rev'] / financials['ebit']))
 
 
 def operating_profit(financials):

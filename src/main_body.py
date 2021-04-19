@@ -12,8 +12,15 @@ class Year:
         self.net = net
 
 
-def input_attrs(initial_string:'str') -> 'tuple':
-    """Generates multiple inputs for financial data"""
+def input_attrs(initial_string: 'str') -> 'tuple':
+    """Generates multiple inputs for financial data
+
+     :param initial_string:
+     :type initial_string: str
+
+     :returns: rev, cogs, assets, liab, equity, net
+     :rtype: dict"""
+
     print(initial_string)
     rev = input("Revenues")
     cogs = input("Costs of goods")
@@ -25,7 +32,20 @@ def input_attrs(initial_string:'str') -> 'tuple':
 
 
 def plot_plots(years:'list', ylabel:'str', attribute:'str') -> 'image':
-    """creating visualizations for comparison of selected value over the periods"""
+    """creating visualizations for comparison of selected value over the periods
+
+    :param years:
+    :type years: list
+
+    :param ylabel:
+    :type years: str
+
+    :param attribute:
+    :type years: str
+
+    :returns: rev, cogs, assets, liab, equity, net
+    :rtype: dict"""
+
     plt.tight_layout()
     plt.style.use("bmh")
     x_axis = range(1, len(years) + 1)
@@ -44,8 +64,8 @@ def plot_balance(years:'list') -> 'image':
     x_axis = range(1, len(years) + 1)
     t_asset_labels = [int(getattr(year, 'assets')) for year in years]
     t_liabl_labels = [int(getattr(year, 'liab')) for year in years]
-    ax1.bar(x_axis - width/2, t_asset_labels, width, label='Total assets')
-    ax1.bar(x_axis + width/2, t_liabl_labels, width, label='Total liabilities')
+    ax1.bar([x - width for x in x_axis], t_asset_labels, width, label='Total assets')
+    ax1.bar([x for x in x_axis], t_liabl_labels, width, label='Total liabilities')
     ax1.set_xlabel('Periods')
     ax1.legend()
 
@@ -68,17 +88,17 @@ def plot_income(years:'list') -> 'image':
     x_axis = range(1, len(years) + 1)
     rev_labels = [int(getattr(year, 'rev', )) for year in years]
     net_labels = [int(getattr(year, 'net', )) for year in years]
-    ax1.bar(x_axis - width / 2, rev_labels, width, label='Revenue')
-    ax1.bar(x_axis + width / 2, net_labels, width, label='Net income')
+    ax1.bar([x - width for x in x_axis], rev_labels, width, label='Revenue')
+    ax1.bar([x for x in x_axis], net_labels, width, label='Net income')
     ax1.set_xlabel('Periods')
     ax1.legend()
 
     ax2 = ax1.twinx()
 
-    profit_margin = [a / b * 100 for a, b in zip(net_labels, rev_labels)]
-    ax2.plot(x_axis, profit_margin, color='red', label='Profit margin', lw=3)
+    profit_margin = [b / a * 100 for a, b in zip(net_labels, rev_labels)]
+    ax2.plot(x_axis, profit_margin, color='red', label='Profit margin', lw=2)
     ax2.set_ylabel('%')
-    ax2.legend(loc=2)
+    ax2.legend(loc=1)
 
     plt.xticks(x_axis, x_axis)
     fig.tight_layout()
@@ -127,10 +147,10 @@ def vertical_analysis(manual_data_input:'bool'):
         if manual_data_input is True:
             import manual_input
             manual_input.read_information_input()
-            import functions_ratios
+            from src import functions_ratios
         else:
-            import yahoo_finance
-            import functions_ratios
+            from src import functions_ratios
+            import manual_input
         print(
             "please select pics\n 1 - current ratio analysis\n 2 - capital structure\n "
             "3 - cash conversion\n 4 - profitability")
@@ -144,9 +164,9 @@ def vertical_analysis(manual_data_input:'bool'):
                 functions_ratios.cash_conversion_cycle(manual_input.financials)
             if select_h_main == 4:
                 functions_ratios.profitability(manual_input.financials)
-            end = input('Enter "Q" if you wat to go back.\n Enter any key to select other option')
+            end = input('Enter "Q" if you wat to go back.\nEnter any key to select other option')
             if end in ('Q', 'q'):
-                sys.exit()
+                return
 
 
 def main_loop():
@@ -184,8 +204,9 @@ def main_loop():
                         years.append(year)
                     plot_balance(years)
             elif select_menu == 5:
+                import yahoo_finance
                 vertical_analysis(manual_data_input = False)
-                import functions_ratios
+                from src import functions_ratios
             else:
                 print("Wrong choice")
         end = input('Enter "Q" if you want to exit.\n Enter any key to select other option: ')

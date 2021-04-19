@@ -8,7 +8,7 @@ company = input('enter companies abbreviation: ')
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--no-sandbox')
-wd = webdriver.Chrome('C:\Drivers\chromedriver_win32\chromedriver.exe', options=chrome_options)
+wd = webdriver.Chrome('C:\Program Files (x86)\chromedriver.exe', options=chrome_options)
 
 DELAY = 25
 
@@ -18,7 +18,7 @@ wd.get('https://finance.yahoo.com/quote/' + company + '/financials/')
 
 #pop_up
 try:
-    btn = WebDriverWait(wd, DELAY).until(EC.presence_of_element_located((By.XPATH, '//*[@id="consent-page"]/div/div/div/div[2]/div[2]/form/button')))
+    btn = WebDriverWait(wd, DELAY).until(EC.presence_of_element_located((By.XPATH, '//*[@id="consent-page"]/div/div/div/form/div[2]/div[2]/button')))
     wd.execute_script("arguments[0].scrollIntoView();", btn)
     wd.execute_script("arguments[0].click();", btn)
 except:
