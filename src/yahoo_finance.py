@@ -24,14 +24,14 @@ try:
 except:
     pass
 
-results = WebDriverWait(wd, DELAY).until(EC.presence_of_element_located((By.ID, 'Col1-1-Financials-Proxy')))
+results = WebDriverWait(wd, DELAY).until(EC.presence_of_element_located((By.CSS_SELECTOR, "span[data-reactid='35']")))
 
 soup_income = BeautifulSoup(results.get_attribute('innerHTML'), 'html.parser')
 
-revenue_element = soup_income.find('span', string='Total Revenue').find_next('span').text
-cogs_element = soup_income.find('span', string='Cost of Revenue').find_next('span').text
-ebit_element = soup_income.find('span', string='Operating Income').find_next('span').text
-net_element = soup_income.find('span', string='Pretax Income').find_next('span').text
+#revenue_element = soup_income.find('span', string='Total Revenue').find_next('span').text
+#cogs_element = soup_income.find('span', string='Cost of Revenue').find_next('span').text
+#ebit_element = soup_income.find('span', string='Operating Income').find_next('span').text
+#net_element = soup_income.find('span', string='Pretax Income').find_next('span').text
 
 wd.get('https://finance.yahoo.com/quote/' + company + '/balance-sheet/')
 
@@ -57,5 +57,9 @@ short_liabl_element = soup_balance.find('span', string='Accounts Payable').find_
 tot_liab_element = soup_balance.find('span', string='Total Liabilities').find_next('span').text
 tot_equity_element = soup_balance.find('span', string="Total stockholders' equity").find_next('span').text
 
+print(short_assets_element)
+print(inventory_element)
+print(tot_assets_element)
+print(short_liabl_element)
 wd.quit()
 
